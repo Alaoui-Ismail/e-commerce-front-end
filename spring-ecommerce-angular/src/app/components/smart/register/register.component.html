@@ -1,0 +1,53 @@
+<div class="bg-img">
+    <div class="content">
+
+        <header>Create new account </header>
+        <form #userRegister="ngForm" (ngSubmit)="onRegisterUser(userRegister)">
+            <!-- <small style="color: red;"><i class="fal fa-exclamation"></i>{{message}}</small> -->
+            <div class="form-group">
+                <div class="field">
+                    <span class="fa fa-user"></span>
+                    <input name="firstname" #firstname="ngModel" [(ngModel)]="user.firstname" type="text" required placeholder="first name">
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="field">
+                    <span class="fa fa-envelope"></span>
+                    <input name="lastname" #lastname="ngModel" [(ngModel)]="user.lastname" type="text" required placeholder="last name ">
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="field">
+                    <span class="fa fa-envelope"></span>
+                    <input name="email" #email="ngModel" [(ngModel)]="user.email" type="email" required placeholder="Email or Username">
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="field space">
+                    <span class="fa fa-lock"></span>
+                    <input name="password" #password="ngModel" [(ngModel)]="user.password" type="password" required placeholder="Password">
+
+                </div>
+            </div>
+
+
+            <br><br>
+            <div class="field">
+                <!-- <input type="submit" value="LOGIN"> -->
+                <input type="submit" class="outline" value="REGISTER" />
+            </div>
+        </form>
+
+
+        <div class="signup">
+            Do you have Account?
+            <a routerLink="/login">Login</a>
+        </div>
+    </div>
+</div>

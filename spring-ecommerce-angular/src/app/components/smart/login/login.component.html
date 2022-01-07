@@ -2,12 +2,24 @@
     <div class="content">
 
         <header>Login with your account </header>
-        <form [formGroup]="LoginForm">
+        <form [formGroup]="LoginForm" (ngSubmit)="Login()">
+            <div style="color: red; font-weight: 200;border: 1px ">
+                {{message}}
+
+            </div>
+
+            <br>
+
             <div class="form-group">
                 <div class="field">
                     <span class="fa fa-envelope"></span>
-                    <input formControlName="email" type="text" required placeholder="Email or Username">
+                    <input formControlName="email" type="text" required placeholder="Email ">
 
+                </div>
+
+                <div *ngIf="email?.invalid && ((email)?.touched) || email?.dirty">
+                    <div *ngIf="email?.getError('required')"><i class="fa fa-ban" style="color: red;">&nbsp;This field is required</i></div>
+                    <div *ngIf="email?.getError('email')"><i class="fa fa-ban" style="color: red;">&nbsp;this field should be email address</i></div>
                 </div>
             </div>
 
@@ -17,9 +29,14 @@
                     <input formControlName="password" type="password" required placeholder="Password">
 
                 </div>
+
+                <div *ngIf="password?.invalid && ((password)?.touched) || password?.dirty">
+                    <div *ngIf="password?.getError('required')"><i class="fa fa-ban" style="color: red;">&nbsp;This field is required</i></div>
+                    <div *ngIf="password?.getError('minLength')  < 2"><i class="fa fa-ban" style="color: red;">&nbsp;this field should be 6 characters</i></div>
+                </div>
             </div>
 
-            {{LoginForm.value }}
+            <!-- {{LoginForm.value |json }} -->
             <br><br>
             <div class="field">
                 <!-- <input type="submit" value="LOGIN"> -->
@@ -30,7 +47,7 @@
 
         <div class="signup">
             Don't have account?
-            <a href="#">Signup Now</a>
+            <a routerLink="/register">Signup Now</a>
         </div>
     </div>
 </div>
