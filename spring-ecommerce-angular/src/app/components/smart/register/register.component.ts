@@ -44,10 +44,11 @@ export class RegisterComponent implements OnInit {
   }
 
   onRegisterUser(form: NgForm) {
+    
     this.registerService.registerUser(form.value)
       .subscribe((data) => {
         console.log(data);
-
+        
       },
         error => {
           console.error(error);

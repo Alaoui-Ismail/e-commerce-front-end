@@ -5,14 +5,17 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class CategoryService {
 
   constructor(private http: HttpClient) { }
 
 
+  readonly host: string = "http://localhost:8888";
 
-  
-  login(data: { email: string, password: string }): Observable<any> {
-    return this.http.post("http://localhost:8888/users/login", data);
+  public getHost() {
+    this.host;
+  }
+  public getRessources(url: string): Observable<any> {
+    return this.http.get(this.host + url);
   }
 }

@@ -1,0 +1,26 @@
+<body>
+    <div class="container">
+
+        <div class="wrapper" *ngIf="currentUser$">
+            <div class=" search_box ">
+                <div class="dropdown ">
+                    <div class="default_option " (click)="addJsCode() ">All</div>
+                    <ul>
+                        <li *ngFor=" let c of Parentcategories;let indexOfelement=index; " (click)="addJsCode1(c,indexOfelement) ">
+
+                            {{c}}
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="search_field ">
+                    <input type="text " class="input " placeholder="Search for product ... " (keyup)="newSearchByName(query.value)" #query>
+                    <i class="fa fa-search " type="submit "></i>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</body>

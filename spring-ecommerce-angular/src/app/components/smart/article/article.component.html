@@ -1,0 +1,68 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!--Container for products-->
+<!-- dropdown component -->
+<app-dropdownsearch (searchEvent)="searchByName($event)"></app-dropdownsearch>
+
+<div class="container mb-5 mt-5" style="padding-bottom: 20px;">
+    <!-- <input type="text" class="form-control" (keyup)="searchByName(query.value)" #query> -->
+    <div class="row">
+        <!--Card1-->
+        <div class="col-md-3" *ngFor="let article of searchProducts$">
+            <div class="card mt-3">
+                <div class="product-1 align-items-center p-2 text-center">
+                    <div class="wrapper">
+                        <div class="zoom-effect-container">
+                            <div class="image-card">
+                                <img src="{{this.articleService.host+'/articles/imageArticle/'+article.articleId}}" width="130" height="130" class="rounded">
+
+                            </div>
+                        </div>
+                        <div class="cost mt-3 text-dark">
+
+                            <h4>{{article.articleName}}</h4>
+
+                        </div>
+
+                        <div class="heart">
+                            <input id="toggle-heart" type="checkbox" />
+
+                            <label for="toggle-heart"><i class="fa fa-heart" aria-hidden="true"></i></label>
+
+                        </div>
+                        <!--Product info-->
+
+                        <div class="mt-3 info">
+
+                            <span class="text1">{{article.articleDescription}}</span>
+
+                        </div>
+
+                        <div class="mt-3 info">
+
+                            <span class="text1" style="font-weight: bold; font-size: 17px;">{{article.articlePrice}}$</span>
+
+                        </div>
+                        <!--Button add to cart-->
+
+                        <div class="p-2 d-flex flex-column article text-center text-white mt-3 cursor">
+
+                            <div class="text-uppercase">
+
+                                <i class="fa fa-cart-plus" aria-hidden="true">&nbsp;</i>
+
+                                <span style="font-size: 15px;" routerLink="/articles">Add To Cart</span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>

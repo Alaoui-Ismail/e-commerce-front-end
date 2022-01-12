@@ -3,7 +3,76 @@
 
         <img src="/assets/icons/e-comm-logo.png" width="70px">
 
-        <ul class="nav-menu">
+        <ul *ngIf="currentUser$" class="nav-links">
+            <!-- <input type="checkbox" id="checkbox_toggle" /> -->
+            <!-- <label for="checkbox_toggle" class="hamburger"><strong>&#9776;</strong></label> -->
+            <div class="menu">
+                <li>
+
+
+
+                    <!--  -->
+                    <a>
+
+                        <span><i class="fa fa-user " aria-hidden="true" 
+                        style="color:#008000;
+                                font-size: 25px;
+                                margin-top: 3px;"></i>
+                                
+                               
+                            
+                            </span>
+
+
+
+                    </a>
+                </li>
+                <li>
+                    <!-- <div class="row">
+                        <a id="cart" (click)="onClick()"><i class="fa fa-shopping-cart"></i> Cart <span class="badge">3</span></a>
+
+                    </div> -->
+                    <a id="cart" (click)="onClick()">
+                        <div class="row">
+                            <span><i class="fa fa-shopping-cart" aria-hidden="true" 
+                            style="color:#008000;
+                                font-size: 23px;
+                                margin-top: 2px;"></i></span>
+                        </div>
+                    </a>
+                </li>
+                <li class="services">
+                    <a>
+                        <div class="row">
+                            <span><i class="fa fa-heart" aria-hidden="true" 
+                            style="color:#008000;
+                                font-size: 22px;
+                                margin-top: 4px;"></i></span>
+                        </div>
+                    </a>
+                </li>
+                <li *ngIf="currentUser$" class="services">
+                    <button (click)="logout()">
+                        <div class="row">
+                            <i class="fa fa-sign-out" aria-hidden="true" 
+                            style="color:#008000;
+                                font-size: 22px;
+                                margin-top: 4px;"></i>
+                        </div>
+                       
+                    </button>
+                </li>
+
+
+                <!-- dropdown hover -->
+
+
+            </div>
+        </ul>
+
+
+        <!-- logged -->
+        <ul *ngIf="!currentUser$" class="nav-menu">
 
             <li class="nav-item">
 
@@ -13,10 +82,62 @@
                 <a routerLink="/login" class="nav-link"><i class="fa fa-user"></i>&nbsp; Login</a>
             </li>
         </ul>
-        <div class="responsive">
+        <!-- <div class="responsive">
             <span class="bar"></span>
             <span class="bar"></span>
             <span class="bar"></span>
-        </div>
+        </div> -->
+
+        <!-- mat progress bar -->
+
+
+
     </nav>
+    <div *ngIf="loaderService.isLoading | async" class="loader-container">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+
+
+
+    <!--  -->
+
+    <div *ngIf="currentUser$ && show" class="container" @fadeIn @fadeOut>
+        <div class="shopping-cart">
+            <div class="shopping-cart-header">
+                <i class="fa fa-shopping-cart cart-icon"></i><span class="badge">3</span>
+                <div class="shopping-cart-total">
+                    <span class="lighter-text">Total:</span>
+                    <span class="main-color-text">$2,229.97</span>
+                </div>
+            </div>
+            <!--end shopping-cart-header -->
+
+            <ul class="shopping-cart-items">
+                <li class="clearfix">
+                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item1.jpg" alt="item1" />
+                    <span class="item-name">Sony DSC-RX100M III</span>
+                    <span class="item-price">$849.99</span>
+                    <span class="item-quantity">Quantity: 01</span>
+                </li>
+
+                <li class="clearfix">
+                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item2.jpg" alt="item1" />
+                    <span class="item-name">KS Automatic Mechanic...</span>
+                    <span class="item-price">$1,249.99</span>
+                    <span class="item-quantity">Quantity: 01</span>
+                </li>
+
+                <li class="clearfix">
+                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item3.jpg" alt="item1" />
+                    <span class="item-name">Kindle, 6" Glare-Free To...</span>
+                    <span class="item-price">$129.99</span>
+                    <span class="item-quantity">Quantity: 01</span>
+                </li>
+            </ul>
+
+            <a href="#" class="button">Checkout</a>
+        </div>
+        <!--end shopping-cart -->
+    </div>
+    <!--end container -->
 </header>

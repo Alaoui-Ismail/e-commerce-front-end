@@ -5,28 +5,53 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/smart/login/login.component';
 import { NavbarComponent } from './components/dump/navbar/navbar.component';
 import { PageNotFoundComponent } from './components/dump/page-not-found/page-not-found.component';
-import { AppRoutingModule } from './app-routing.module';
 
-import { ReactiveFormsModule } from '@angular/forms';
+import { DropdownsearchComponent } from './components/dump/dropdownsearch/dropdownsearch.component';
+import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './components/smart/register/register.component';
-import {HttpClientModule} from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { InterceptorService } from './services/interceptor.service';
+import { CategoryService } from './services/categories.service';
+import { CategoryComponent } from './components/smart/category/category.component';
+import { ArticleComponent } from './components/smart/article/article.component';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     NavbarComponent,
     PageNotFoundComponent,
-    RegisterComponent
+    RegisterComponent,
+    DropdownsearchComponent,
+    CategoryComponent,
+    ArticleComponent,
+   
+    
+    
+   
+  
+
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    FormsModule
+   BrowserModule,
+   AppRoutingModule,
+   ReactiveFormsModule,
+   HttpClientModule,
+   FormsModule,
+   MatProgressBarModule
+   
+
   ],
-  providers: [],
+  providers: [
+    {
+      provide:HTTP_INTERCEPTORS, useClass:InterceptorService, multi: true
+    },
+    
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
