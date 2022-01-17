@@ -4,11 +4,14 @@ import { AccountService } from 'src/app/services/account.service';
 import { LoaderService } from 'src/app/services/loader.service';
 import { TokenService } from 'src/app/services/token.service';
 import { transition, style, animate, trigger } from '@angular/animations';
+import { CartService } from 'src/app/services/cart.service';
+import { Cart } from 'src/app/models/Cart.model';
+import { ArticlesService } from 'src/app/services/articles.service';
 
 
 const enterTransition = transition(':enter', [
   style({
-    opacity: 0
+    opacity: 1
   }),
   animate('1s ease-in', style({
     opacity: 1
@@ -44,21 +47,62 @@ const fadeOut = trigger('fadeOut', [
 export class NavbarComponent implements OnInit {
 
   currentUser$: null = null;
+
+
+  totalPrice: number = 0.00;
+  totalQuantity: number = 0;
+  cartItems: Cart [] =[];
+
   constructor(private accountService: AccountService,
     private tokenService: TokenService,
+    private cartService : CartService,
     private router: Router,
-    public loaderService: LoaderService) {
+    public loaderService: LoaderService,
+    private carteService:CartService,
+    public articleService : ArticlesService) {
 
   }
 
 
   ngOnInit(): void {
 
+    this.updateCart()
+
     this.accountService.authStatus.subscribe(() => {
       //   this.loaderService.isLoading;
       this.currentUser$ = this.tokenService.getInfos();
     })
+
   }
+  updateCart() {
+    this.cartItems = this.carteService.cartItems;
+
+    this.cartService.priceTotal$.subscribe(
+      data =>{
+        this.totalPrice = data
+        console.log("data", data)
+      } 
+    );
+
+    this.cartService.quantityTotal$.subscribe(
+      data =>{
+        this.totalQuantity = data
+        console.log("data 2", data)
+      } 
+
+    );
+
+    console.log("cart status -----",this.totalPrice)
+
+
+  }
+
+
+
+  // 
+  
+
+
 
   logout() {
     this.tokenService.remove();
@@ -67,35 +111,22 @@ export class NavbarComponent implements OnInit {
   }
 
 
-  show :boolean= false;
-  showBalance :boolean=false;
+  show: boolean = false;
+  showBalance: boolean = false;
 
   onClick() {
-    if(this.show)
-      return this.show=false
+    if (this.show)
+      return this.show = false
     else
-        this.show = true;
-    
+      this.show = true;
+
     return null;
-  
+
   }
 
   onSave() {
     this.show = false;
   }
 
-  // cartFunction() {
-  //   document.querySelectorAll("#cart").forEach(() => {
-  //     document.querySelectorAll(".shopping-cart").forEach((y) => {
 
-  //     })
-  //   })
-  // }
-  // (function(){
-
-  //   document.querySelector("#cart").addEventListener("click", function() {
-  //     document.querySelector(".shopping-cart").fadeToggle( "fast");
-  //   });
-
-  // })();
 }

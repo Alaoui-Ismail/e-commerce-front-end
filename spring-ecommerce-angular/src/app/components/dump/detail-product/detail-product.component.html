@@ -1,0 +1,76 @@
+<div *ngIf="cartItems.length > 0">
+
+    <div class="wrap cf">
+        <!-- <h1 class="projTitle">Responsive Table<span>-Less</span> Shopping Cart</h1> -->
+        <div class="heading cf">
+            <h1 style=" font-family: 'Montserrat', sans-serif;">Shopping Bag</h1>
+            <!-- <a href="#" class="continue">Continue Shopping</a> -->
+        </div>
+        <div class="cart">
+
+            <ul class="cartWrap">
+                <li class="items odd" *ngFor="let item of cartItems">
+
+                    <div class="infoWrap">
+                        <div class="cartSection">
+                            <img src="{{this.articleService.host+'/articles/imageArticle/'+item.id}}" alt="" class="itemImg" />
+                            <p class="itemNumber">#{{item.description | slice:0:15}}</p>
+                            <h3>{{item.name}}</h3>
+
+                            <!-- <p> <input type="text" class="qty" placeholder="3" /> x $5.00</p> -->
+
+                            <!-- <p class="stockStatus"> In Stock</p> -->
+                        </div>
+
+
+                        <div class="prodTotal cartSection">
+                            <p>{{item.price | currency}}</p>
+                        </div>
+                        <div class="cartSection removeWrap">
+                            <a (click)="removeItem(item)" class="remove">x</a>
+                        </div>
+                    </div>
+                </li>
+
+
+
+                <!--<li class="items even">Item 2</li>-->
+
+            </ul>
+        </div>
+
+
+        <div class="subtotal cf">
+            <ul>
+                <li class="totalRow"><span class="label">Subtotal</span><span class="value">{{totalPrice|currency:'USD'}}</span></li>
+
+                <!-- <li class="totalRow"><span class="label">Shipping</span><span class="value">FREE</span></li> -->
+
+                <li class="totalRow"><span class="label">Quantity</span><span class="value">{{totalQuantity}}</span></li>
+
+                <!-- <li class="totalRow final"><span class="label">Quantity</span><span class="value">{{totalQuantity}}</span></li> -->
+                <li class="totalRow"><a routerLink="/checkout" class="btn continue">Checkout</a></li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="container-fluid mt-100" *ngIf="cartItems.length ==0">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+
+                </div>
+                <div class="card-body cart">
+                    <div class="col-sm-12 empty-cart-cls text-center"> <img src="/assets/icons/e-comm-logo.png" width="130" height="130" class="img-fluid mb-4 mr-3">
+                        <h3><strong>Your Cart is Empty</strong></h3>
+                        <!-- <h4>Add something </h4> <a href="/articles/all" class="btn btn-primary " data-abc="true">continue shopping</a> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

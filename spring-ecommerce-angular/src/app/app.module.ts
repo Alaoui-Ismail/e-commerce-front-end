@@ -16,9 +16,11 @@ import { InterceptorService } from './services/interceptor.service';
 import { CategoryService } from './services/categories.service';
 import { CategoryComponent } from './components/smart/category/category.component';
 import { ArticleComponent } from './components/smart/article/article.component';
+import { DetailProductComponent } from './components/dump/detail-product/detail-product.component';
 
 
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SaveCommandComponent } from './components/smart/save-command/save-command.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +31,8 @@ import { ArticleComponent } from './components/smart/article/article.component';
     DropdownsearchComponent,
     CategoryComponent,
     ArticleComponent,
+    DetailProductComponent,
+    SaveCommandComponent,
    
     
     
@@ -42,7 +46,8 @@ import { ArticleComponent } from './components/smart/article/article.component';
    ReactiveFormsModule,
    HttpClientModule,
    FormsModule,
-   MatProgressBarModule
+   MatProgressBarModule,
+   BrowserAnimationsModule
    
 
   ],

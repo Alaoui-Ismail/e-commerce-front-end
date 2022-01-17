@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Cart } from 'src/app/models/Cart.model';
+import { Product } from 'src/app/models/Product';
 import { ArticlesService } from 'src/app/services/articles.service';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-article',
@@ -18,6 +21,7 @@ export class ArticleComponent implements OnInit {
 
 
   constructor(public articleService: ArticlesService,
+    private cartService : CartService,
     private route: ActivatedRoute,
     private router: Router) {
     this.router.events.subscribe((val) => {
@@ -51,11 +55,19 @@ export class ArticleComponent implements OnInit {
   public searchByName(query: string) {
     console.log(query);
     this.searchProducts$ = (query) ? this.articles$.filter((x: { articleName: any; }) => x.articleName.toLocaleLowerCase()
-      .includes(query.toLocaleLowerCase())) : this.articles$ ;
-      
+      .includes(query.toLocaleLowerCase())) : this.articles$;
+
     // console.log(this.searchProducts$);
   }
 
+
+  addToCart(product: Product) {
+    console.log(`add to cart ${product.articleName} , price = ${product.articlePrice},quantity= ${product.articleQuantity}`);
+
+    const theCartItem = new Cart(product);
+    this.cartService.addToCart(theCartItem);
+
+  }
 
 
 }

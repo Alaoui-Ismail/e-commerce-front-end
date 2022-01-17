@@ -17,7 +17,7 @@
 
                 </div>
 
-                <div *ngIf="email?.invalid && ((email)?.touched) || email?.dirty">
+                <div *ngIf="email?.invalid && ((email)?.touched) || email?.dirty" style=" font-family: 'Montserrat', sans-serif;">
                     <div *ngIf="email?.getError('required')"><i class="fa fa-ban" style="color: red;">&nbsp;This field is required</i></div>
                     <div *ngIf="email?.getError('email')"><i class="fa fa-ban" style="color: red;">&nbsp;this field should be email address</i></div>
                 </div>
@@ -30,7 +30,7 @@
 
                 </div>
 
-                <div *ngIf="password?.invalid && ((password)?.touched) || password?.dirty">
+                <div *ngIf="password?.invalid && ((password)?.touched) || password?.dirty" style=" font-family: 'Montserrat', sans-serif;">
                     <div *ngIf="password?.getError('required')"><i class="fa fa-ban" style="color: red;">&nbsp;This field is required</i></div>
                     <div *ngIf="password?.getError('minLength')  < 2"><i class="fa fa-ban" style="color: red;">&nbsp;this field should be 6 characters</i></div>
                 </div>

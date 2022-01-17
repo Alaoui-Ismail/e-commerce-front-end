@@ -20,9 +20,9 @@ export class DropdownsearchComponent implements OnInit {
 
   @Output() searchEvent = new EventEmitter<string>();
 
-  @Input() drpSearch:any;
+  @Input() drpSearch: any;
 
-
+  show: boolean = false;
   constructor(private accountService: AccountService,
     private tokenService: TokenService,
     private router: Router,
@@ -42,18 +42,31 @@ export class DropdownsearchComponent implements OnInit {
 
   }
 
-    newSearchByName(value:string){
-      this.searchEvent.emit(value);
-    }
+  newSearchByName(value: string) {
+    this.searchEvent.emit(value);
+  }
 
 
-
+  // x:any;
+  y: boolean=false;
   addJsCode() {
     let test = document.querySelectorAll('.dropdown ul');
-    test.forEach((x: any) => {
+    test.forEach((x) => {
       x.classList.add('active');
-    });
+      if(x.classList.contains('active')){
+        console.log("active ",test.length ,`${x.classList.contains('active')}`);
+      
+       // this.y!=this.y;
+      }
+      //  x.classList.remove('active');
+    }
+    
+    );
 
+   
+    //document.querySelector(".dropdown ul")!.classList.remove('active');
+
+    // this.onClick();
   }
 
   addJsCode1(item: any, i: number) {
@@ -70,6 +83,15 @@ export class DropdownsearchComponent implements OnInit {
 
 
 
+  onClick() {
+    if (this.show)
+      return this.show = false
+    else
+      this.show = true;
+
+    return null;
+
+  }
 
 
 
