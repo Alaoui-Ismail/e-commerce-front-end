@@ -21,13 +21,15 @@ export class CartService {
   // console.log("items", this.cartList);
 
   cartItems: Cart[] = [];
+  shopItems: Cart[] = [];
+
   readonly host = `http://localhost:8888/commands/add`;
 
   priceTotal$: Subject<number> = new Subject<number>();
   quantityTotal$: Subject<number> = new Subject<number>();
 
   constructor(private http: HttpClient) {
-    // const ls = JSON.parse(localStorage.getItem('shopping'));
+  // JSON.parse(localStorage.getItem('shopping'));
     // if (ls) {
     //   this.priceTotal$.next(ls);
     //   this.quantityTotal$.next(ls);
@@ -38,6 +40,8 @@ export class CartService {
   }
 
   addToCart(cartItem: Cart) {
+    //  JSON.parse(localStorage.getItem('shopping'));
+    //   JSON.parse(localStorage.getItem('qte'));
     // const tmpStorage = JSON.parse(localStorage.getItem('shopping'));
 
     // console.log(tmpStorage);
@@ -62,9 +66,12 @@ export class CartService {
       incrementItem++;
       // localStorage.setItem('shopping', JSON.stringify(tmpStorage));
     } else {
-      // this.cartItems = JSON.parse(localStorage.getItem('shopping'));
-      this.cartItems.push(cartItem);
-      // localStorage.setItem('shopping', JSON.stringify(this.cartItems));
+       this.cartItems = JSON.parse(localStorage.getItem('cart'));
+       this.cartItems.push(cartItem);
+       localStorage.setItem('cart', JSON.stringify(this.cartItems));
+      
+       this.shopItems = this.cartItems;
+       console.log("shop itmes", this.shopItems);
     }
     const body = {
       article_id: cartItem.id,
@@ -80,6 +87,8 @@ export class CartService {
 
 
   countTotalPriceAndQuanity() {
+  
+
     let totalPriceValue: number = 0;
     let totalQuanityValue: number = 0;
 
@@ -89,11 +98,15 @@ export class CartService {
 
       totalPriceValue += ((currentItem.quantity - currentItem.quantity) + 1) * currentItem.price;
       totalQuanityValue += ((currentItem.quantity - currentItem.quantity) + 1);
+      localStorage.setItem('shopping',JSON.stringify(totalPriceValue));
+      localStorage.setItem('qte',JSON.stringify(totalQuanityValue));
+
     }
     // JSON.parse(localStorage.getItem('shopping'));
     this.priceTotal$.next(totalPriceValue);
     this.quantityTotal$.next(totalQuanityValue);
 
+    // localStorage.setItem('shopping',JSON.stringify(this.priceTotal$.next(totalPriceValue)));
     // localStorage.setItem('shopping',JSON.stringify(this.priceTotal$));
     // localStorage.setItem('shopping',JSON.stringify(this.quantityTotal$));
 

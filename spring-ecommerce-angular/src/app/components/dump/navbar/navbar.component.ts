@@ -53,8 +53,8 @@ export class NavbarComponent implements OnInit {
   totalPrice: number = 0.00;
   totalQuantity: number = 0;
   cartItems: Cart[] = [];
-  items : Cart [];
-  qte: any;
+  items: Cart[];
+  qte: number;
 
   constructor(private accountService: AccountService,
     private tokenService: TokenService,
@@ -68,7 +68,14 @@ export class NavbarComponent implements OnInit {
 
 
   ngOnInit(): void {
-    // this.getStorage();
+    //  this.getStorage();
+    //  this.getLengthStorage();
+    this.cartItems = JSON.parse(localStorage.getItem('cart'));
+    this.totalPrice =  JSON.parse(localStorage.getItem('shopping'));
+    this.totalQuantity =  JSON.parse(localStorage.getItem('qte'));
+
+    
+
     
     this.updateCart()
 
@@ -78,31 +85,37 @@ export class NavbarComponent implements OnInit {
 
   }
 
+  navigateTowishlist(){
+
+   location.reload()
+  }
+
   updateCart() {
 
-    // this.cartItems = JSON.parse(localStorage.getItem('shopping'));
-    // console.log("items console", this.items);
-     this.cartItems = this.carteService.cartItems;
+
+     this.cartItems =  this.cartService.shopItems;
+    console.log("iteeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeems",this.cartItems)
+     this.cartItems = JSON.parse(localStorage.getItem('cart'));
     console.log("items", this.items);
 
     this.cartService.priceTotal$.subscribe(
-      data =>{
-        this.totalPrice = data ;
-        // localStorage.setItem("price",JSON.stringify(this.totalPrice));
+      data => {
+        this.totalPrice = data;
+
         console.log("data", data)
-      } 
+      }
     );
     this.cartService.quantityTotal$.subscribe(
-      data =>{
-        this.totalQuantity = data
-        // localStorage.setItem("quantity",JSON.stringify(this.totalQuantity));
+      data => {
+        this.totalQuantity = data 
+        // localStorage.setItem('qte',JSON.stringify(this.totalQuantity));
         console.log("data 2", data)
-      } 
+      }
     );
-   
 
     console.log("cart status -----", this.totalPrice);
   }
+
 
 
 
@@ -118,6 +131,7 @@ export class NavbarComponent implements OnInit {
   showBalance: boolean = false;
 
   onClick() {
+    // this.navigateTowishlist();
     if (this.show)
       return this.show = false
     else

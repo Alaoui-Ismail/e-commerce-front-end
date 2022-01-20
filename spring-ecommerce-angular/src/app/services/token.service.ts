@@ -7,6 +7,10 @@ export class TokenService {
 
   public array : Array<any> = [];
   public arrayCart : Array<any> = [];
+  public qte : number;
+  public cart : Array<any> = [];
+
+
 
   constructor() { }
 
@@ -25,6 +29,18 @@ export class TokenService {
       localStorage.setItem('shopping', JSON.stringify(this.arrayCart));
 
     }
+    if(localStorage.getItem('qte') === null){
+
+      localStorage.setItem('qte', JSON.stringify(this.qte));
+
+    }
+    if(localStorage.getItem('cart') === null){
+
+      localStorage.setItem('cart', JSON.stringify(this.cart));
+
+    }
+
+
   }
 
   handle(data: any) {

@@ -50,6 +50,7 @@ export class RegisterComponent implements OnInit {
       .subscribe((data) => {
         console.log(data);
         this.showToastr();
+   
         
       },
         error => {

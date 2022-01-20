@@ -88,16 +88,17 @@ export class ArticleComponent implements OnInit {
     //     console.log("error", error);
     //   });
 
-    // const bodyCart = {
-    //   'name': product.articleName,
-    //   'description': product.articleDescription,
-    //   'price': product.articlePrice,
-    //   'image': product.imageName
-    // }
-    // this.cartList = JSON.parse(localStorage.getItem('shopping'));
-    // this.cartList.push(bodyCart);
-    // localStorage.setItem('shopping', JSON.stringify(this.cartList));
-    // console.log("items", this.cartList);
+  //   const bodyCart = {
+  //     'name': product.articleName,
+  //     'description': product.articleDescription,
+  //     'price': product.articlePrice,
+  //     'image': product.imageName
+  //   }
+  //   this.cartList = JSON.parse(localStorage.getItem('shopping'));
+  //   this.cartList.push(bodyCart);
+  //    localStorage.setItem('qte',JSON.stringify(this.cartList.length));
+  //   localStorage.setItem('shopping', JSON.stringify(this.cartList));
+  //   console.log("items", this.cartList);
   }
 
   // public check(article: any) {
