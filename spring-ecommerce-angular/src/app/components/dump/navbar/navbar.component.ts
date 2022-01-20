@@ -7,6 +7,7 @@ import { transition, style, animate, trigger } from '@angular/animations';
 import { CartService } from 'src/app/services/cart.service';
 import { Cart } from 'src/app/models/Cart.model';
 import { ArticlesService } from 'src/app/services/articles.service';
+import { DetailProductComponent } from '../detail-product/detail-product.component';
 
 
 const enterTransition = transition(':enter', [
@@ -51,56 +52,58 @@ export class NavbarComponent implements OnInit {
 
   totalPrice: number = 0.00;
   totalQuantity: number = 0;
-  cartItems: Cart [] =[];
+  cartItems: Cart[] = [];
+  items : Cart [];
+  qte: any;
 
   constructor(private accountService: AccountService,
     private tokenService: TokenService,
-    private cartService : CartService,
+    private cartService: CartService,
     private router: Router,
     public loaderService: LoaderService,
-    private carteService:CartService,
-    public articleService : ArticlesService) {
+    private carteService: CartService,
+    public articleService: ArticlesService) {
 
   }
 
 
   ngOnInit(): void {
-
+    // this.getStorage();
+    
     this.updateCart()
 
     this.accountService.authStatus.subscribe(() => {
-      //   this.loaderService.isLoading;
       this.currentUser$ = this.tokenService.getInfos();
     })
 
   }
+
   updateCart() {
-    this.cartItems = this.carteService.cartItems;
+
+    // this.cartItems = JSON.parse(localStorage.getItem('shopping'));
+    // console.log("items console", this.items);
+     this.cartItems = this.carteService.cartItems;
+    console.log("items", this.items);
 
     this.cartService.priceTotal$.subscribe(
       data =>{
-        this.totalPrice = data
+        this.totalPrice = data ;
+        // localStorage.setItem("price",JSON.stringify(this.totalPrice));
         console.log("data", data)
       } 
     );
-
     this.cartService.quantityTotal$.subscribe(
       data =>{
         this.totalQuantity = data
+        // localStorage.setItem("quantity",JSON.stringify(this.totalQuantity));
         console.log("data 2", data)
       } 
-
     );
+   
 
-    console.log("cart status -----",this.totalPrice)
-
-
+    console.log("cart status -----", this.totalPrice);
   }
 
-
-
-  // 
-  
 
 
 

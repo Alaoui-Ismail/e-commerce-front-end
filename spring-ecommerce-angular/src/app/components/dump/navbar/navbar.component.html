@@ -12,19 +12,14 @@
 
 
                     <!--  -->
-                    <a>
+                    <a routerLink="/user-details">
 
-                        <span><i class="fa fa-user " aria-hidden="true" 
+                        <span><i class="fa fa-user " aria-hidden="true"  
                         style="color:#008000;
                                 font-size: 25px;
                                 margin-top: 3px;"></i>
-                                
-                               
-                            
+                                                          
                             </span>
-
-
-
                     </a>
                 </li>
                 <li>
@@ -41,7 +36,7 @@
                     </a>
                 </li>
                 <li class="services">
-                    <a>
+                    <a routerLink="/wishlist">
                         <div class="row">
                             <span><i class="fa fa-heart" aria-hidden="true" 
                             style="color:#008000;
@@ -111,7 +106,7 @@
             <!--end shopping-cart-header -->
 
             <ul class="shopping-cart-items">
-                <li class="clearfix" *ngFor="let item of cartItems">
+                <li class="clearfix" *ngFor="let item of cartItems ">
                     <img src="{{this.articleService.host+'/articles/imageArticle/'+item.id}}" style="height: 40px;" alt="item1" />
                     <span class="item-name">{{item.name}}</span>
                     <span class="item-price">{{item.price | currency}}</span>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/models/user.model';
 import { RegisterService } from 'src/app/services/register.service';
 
@@ -19,7 +20,7 @@ export class RegisterComponent implements OnInit {
   };
   message: string = "";
 
-  constructor(private registerService: RegisterService) {
+  constructor(private registerService: RegisterService,private _toastr:ToastrService) {
 
   }
 
@@ -48,6 +49,7 @@ export class RegisterComponent implements OnInit {
     this.registerService.registerUser(form.value)
       .subscribe((data) => {
         console.log(data);
+        this.showToastr();
         
       },
         error => {
@@ -56,6 +58,10 @@ export class RegisterComponent implements OnInit {
         }
         
       )
+  }
+
+  showToastr(){
+      this._toastr.success("registred succesfully", "success")
   }
 
 

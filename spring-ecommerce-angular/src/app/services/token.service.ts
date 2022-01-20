@@ -5,12 +5,26 @@ import { Injectable } from '@angular/core';
 })
 export class TokenService {
 
+  public array : Array<any> = [];
+  public arrayCart : Array<any> = [];
+
   constructor() { }
 
 
   set(data: any) {
     localStorage.setItem('token', data.token);
     localStorage.setItem('id', data.id);
+    // local storage
+    if(localStorage.getItem('favorites') === null){
+
+      localStorage.setItem('favorites', JSON.stringify(this.array));
+
+    }
+    if(localStorage.getItem('shopping') === null){
+
+      localStorage.setItem('shopping', JSON.stringify(this.arrayCart));
+
+    }
   }
 
   handle(data: any) {

@@ -1,7 +1,7 @@
 <body>
     <div class="container">
 
-        <div class="wrapper" *ngIf="currentUser$">
+        <div class="wrapper" *ngIf="currentUser$ && !hasRouter('/product-details') && !hasRouter('/checkout') && !hasRouter('/user-details') &&!hasRouter('/wishlist')">
             <div class=" search_box ">
                 <div class="dropdown ">
                     <div class="default_option " (click)="addJsCode() ">All</div>

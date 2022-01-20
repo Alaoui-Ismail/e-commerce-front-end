@@ -38,6 +38,8 @@ export class DetailProductComponent implements OnInit {
       data => this.totalQuantity = data
     );
 
+   
+    // localStorage.setItem('shopping', JSON.stringify(this.cartItems));
     this.carteService.countTotalPriceAndQuanity();
   }
 
@@ -52,7 +54,7 @@ export class DetailProductComponent implements OnInit {
     console.log("price -1", this.totalPrice);
     this.totalQuantity--;
 
-
+    this.CartDetails();
     console.log(this.cartItems);
 
   }

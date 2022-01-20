@@ -18,12 +18,18 @@ export class ArticleComponent implements OnInit {
 
   // @Input()
   public searchProducts$: any;
+  public articlesList: Array<any> = [];
+  public cartList: Array<any> = [];
+  public result: any;
+  public list: any;
+  setFavorites: void;
 
 
   constructor(public articleService: ArticlesService,
-    private cartService : CartService,
+    private cartService: CartService,
     private route: ActivatedRoute,
     private router: Router) {
+
     this.router.events.subscribe((val) => {
 
       if (val instanceof NavigationEnd) {
@@ -39,6 +45,9 @@ export class ArticleComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log("init", localStorage.getItem('favorites'));
+
+    JSON.parse(localStorage.getItem('favorites'));
   }
 
 
@@ -47,6 +56,10 @@ export class ArticleComponent implements OnInit {
       .subscribe(data => {
         console.log(data);
         this.searchProducts$ = this.articles$ = data;
+
+        var elements = JSON.parse(localStorage.getItem('favorites'));
+        this.list = elements;
+        console.log("Local Storage", this.list)
       })
   }
 
@@ -62,12 +75,121 @@ export class ArticleComponent implements OnInit {
 
 
   addToCart(product: Product) {
-    console.log(`add to cart ${product.articleName} , price = ${product.articlePrice},quantity= ${product.articleQuantity}`);
 
+    console.log(`add to cart ${product.articleName} , price = ${product.articlePrice},quantity= ${product.articleQuantity}`);
+    console.log("article add to cart");
     const theCartItem = new Cart(product);
+    console.log("article componenet");
     this.cartService.addToCart(theCartItem);
+    // this.cartService.addToCart(theCartItem).subscribe(res => {
+    //   console.log("response ", res);
+    // },
+    //   (error) => {
+    //     console.log("error", error);
+    //   });
+
+    // const bodyCart = {
+    //   'name': product.articleName,
+    //   'description': product.articleDescription,
+    //   'price': product.articlePrice,
+    //   'image': product.imageName
+    // }
+    // this.cartList = JSON.parse(localStorage.getItem('shopping'));
+    // this.cartList.push(bodyCart);
+    // localStorage.setItem('shopping', JSON.stringify(this.cartList));
+    // console.log("items", this.cartList);
+  }
+
+  // public check(article: any) {
+
+
+  //   var exists = localStorage.getItem('favorites');
+
+  //   if (exists) {
+
+  //     console.log('local favorite exists');
+  //     this.list = exists;
+  //     if (this.list.some((x: any) => x.id === article.articleId)) {
+  //       return true;
+  //     }
+  //   } else {
+  //     console.log('loacal is not found');
+  //   }
+
+
+
+
+
+  // }
+
+  public check(article: any) {
+
+    var elements = JSON.parse(localStorage.getItem('favorites'));
+
+    this.list = elements;
+
+    if (this.list.some((x: any) => x.id === article.articleId)) {
+
+      return true;
+
+    }
 
   }
+
+
+  // favoris function
+  public favorite(article: any) {
+
+
+    article.isSelected = !article.isSelected;
+
+    var favoris = {
+      'id': article.articleId,
+      'name': article.articleName,
+      'description': article.articleDescription,
+      'price': article.articlePrice,
+      'image': article.articleImage,
+    };
+
+    // localStorage.setItem('favorites', JSON.stringify(this.articlesList));
+    if (article.isSelected) {
+      console.log("selecteeeeed");
+
+      this.articlesList = JSON.parse(localStorage.getItem('favorites'));
+
+      if (!(this.articlesList.some((x: any) => x.id === article.articleId))) {
+
+        localStorage.setItem('entry', JSON.stringify(favoris));
+        console.log("before push");
+        this.articlesList.push(favoris);
+
+        localStorage.setItem('favorites', JSON.stringify(this.articlesList));
+
+      }
+    }
+
+    else if (!article.isSelected) {
+
+      console.log("unselecteeeeeed");
+
+      this.result = this.articlesList.filter(obj => {
+        return obj.id === article.articleId;
+      })
+
+
+      this.articlesList = JSON.parse(localStorage.getItem('favorites'));
+      let index = this.articlesList.findIndex(d => d.id === article.articleId);
+      console.log(index);
+
+      this.articlesList.splice(index, 1);
+
+      localStorage.setItem('favorites', JSON.stringify(this.articlesList));
+
+    }
+
+  }
+
+
 
 
 }

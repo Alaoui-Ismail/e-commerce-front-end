@@ -1,8 +1,7 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AccountService } from 'src/app/services/account.service';
 import { ArticlesService } from 'src/app/services/articles.service';
-import { CategoryService } from 'src/app/services/categories.service';
 import { LoaderService } from 'src/app/services/loader.service';
 import { TokenService } from 'src/app/services/token.service';
 
@@ -34,6 +33,8 @@ export class DropdownsearchComponent implements OnInit {
   }
 
 
+
+
   ngOnInit(): void {
 
     this.accountService.authStatus.subscribe(() => {
@@ -42,28 +43,33 @@ export class DropdownsearchComponent implements OnInit {
 
   }
 
+  hasRouter(route: string) {
+    return this.router.url.includes(route);
+  }
+
+
   newSearchByName(value: string) {
     this.searchEvent.emit(value);
   }
 
 
   // x:any;
-  y: boolean=false;
+  y: boolean = false;
   addJsCode() {
     let test = document.querySelectorAll('.dropdown ul');
     test.forEach((x) => {
       x.classList.add('active');
-      if(x.classList.contains('active')){
-        console.log("active ",test.length ,`${x.classList.contains('active')}`);
-      
-       // this.y!=this.y;
+      if (x.classList.contains('active')) {
+        console.log("active ", test.length, `${x.classList.contains('active')}`);
+
+        // this.y!=this.y;
       }
       //  x.classList.remove('active');
     }
-    
+
     );
 
-   
+
     //document.querySelector(".dropdown ul")!.classList.remove('active');
 
     // this.onClick();

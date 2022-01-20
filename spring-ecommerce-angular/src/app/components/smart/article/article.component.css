@@ -58,15 +58,6 @@
     z-index: 999;
 }
 
-[id='toggle-heart'] {
-    position: absolute;
-    left: -100vw;
-}
-
-[for='toggle-heart'] {
-    color: #aab8c2;
-}
-
-[id='toggle-heart']:checked+label {
-    color: #e2264d;
+.heart {
+    font-size: 19px;
 }
