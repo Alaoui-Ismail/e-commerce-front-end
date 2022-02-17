@@ -80,48 +80,18 @@ export class ArticleComponent implements OnInit {
     console.log("article add to cart");
     const theCartItem = new Cart(product);
     console.log("article componenet");
-    this.cartService.addToCart(theCartItem);
-    // this.cartService.addToCart(theCartItem).subscribe(res => {
-    //   console.log("response ", res);
-    // },
-    //   (error) => {
-    //     console.log("error", error);
-    //   });
+   // this.cartService.addToCart(theCartItem);
+    this.cartService.addToCart(theCartItem).subscribe(res => {
+      console.log("response ", res);
+    },
+      (error) => {
+        console.log("error", error);
+      },() => {
+        console.log("completed");
+      });
 
-  //   const bodyCart = {
-  //     'name': product.articleName,
-  //     'description': product.articleDescription,
-  //     'price': product.articlePrice,
-  //     'image': product.imageName
-  //   }
-  //   this.cartList = JSON.parse(localStorage.getItem('shopping'));
-  //   this.cartList.push(bodyCart);
-  //    localStorage.setItem('qte',JSON.stringify(this.cartList.length));
-  //   localStorage.setItem('shopping', JSON.stringify(this.cartList));
-  //   console.log("items", this.cartList);
   }
 
-  // public check(article: any) {
-
-
-  //   var exists = localStorage.getItem('favorites');
-
-  //   if (exists) {
-
-  //     console.log('local favorite exists');
-  //     this.list = exists;
-  //     if (this.list.some((x: any) => x.id === article.articleId)) {
-  //       return true;
-  //     }
-  //   } else {
-  //     console.log('loacal is not found');
-  //   }
-
-
-
-
-
-  // }
 
   public check(article: any) {
 

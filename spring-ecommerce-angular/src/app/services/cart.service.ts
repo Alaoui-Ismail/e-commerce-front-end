@@ -29,7 +29,7 @@ export class CartService {
   quantityTotal$: Subject<number> = new Subject<number>();
 
   constructor(private http: HttpClient) {
-  // JSON.parse(localStorage.getItem('shopping'));
+    // JSON.parse(localStorage.getItem('shopping'));
     // if (ls) {
     //   this.priceTotal$.next(ls);
     //   this.quantityTotal$.next(ls);
@@ -66,16 +66,17 @@ export class CartService {
       incrementItem++;
       // localStorage.setItem('shopping', JSON.stringify(tmpStorage));
     } else {
-       this.cartItems = JSON.parse(localStorage.getItem('cart'));
-       this.cartItems.push(cartItem);
-       localStorage.setItem('cart', JSON.stringify(this.cartItems));
-      
-       this.shopItems = this.cartItems;
-       console.log("shop itmes", this.shopItems);
+      this.cartItems = JSON.parse(localStorage.getItem('cart'));
+      this.cartItems.push(cartItem);
+      localStorage.setItem('cart', JSON.stringify(this.cartItems));
+
+      this.shopItems = this.cartItems;
+      console.log("shop itmes", this.shopItems);
     }
     const body = {
       article_id: cartItem.id,
-      articleQte: 1
+      articleQte: 1,
+
     }
     // console.log("new storage ",JSON.parse(localStorage.getItem('shopping')));
     console.log("body ", body);
@@ -87,7 +88,7 @@ export class CartService {
 
 
   countTotalPriceAndQuanity() {
-  
+
 
     let totalPriceValue: number = 0;
     let totalQuanityValue: number = 0;
@@ -98,8 +99,8 @@ export class CartService {
 
       totalPriceValue += ((currentItem.quantity - currentItem.quantity) + 1) * currentItem.price;
       totalQuanityValue += ((currentItem.quantity - currentItem.quantity) + 1);
-      localStorage.setItem('shopping',JSON.stringify(totalPriceValue));
-      localStorage.setItem('qte',JSON.stringify(totalQuanityValue));
+      localStorage.setItem('shopping', JSON.stringify(totalPriceValue));
+      localStorage.setItem('qte', JSON.stringify(totalQuanityValue));
 
     }
     // JSON.parse(localStorage.getItem('shopping'));
@@ -130,5 +131,21 @@ export class CartService {
     }
     console.log(` price total = ${totalPriceValue.toFixed(2)}, quantity total = ${totalQuanityValue}`);
     console.log("e----n---d");
+  }
+
+
+  payedCommand(data: {commandId:any,client_id:any}) {
+
+    var _url = `http://localhost:8888/commands/payed`;
+
+  
+    return this.http.post(_url,data,{ responseType: 'text' });
+  }
+
+
+
+  beforePayed() {
+    var url = "http://localhost:8888/commands/getValid";
+    return this.http.get(url);
   }
 }

@@ -55,7 +55,7 @@ export class NavbarComponent implements OnInit {
   cartItems: Cart[] = [];
   items: Cart[];
   qte: number;
-
+  timestamp:number;
   constructor(private accountService: AccountService,
     private tokenService: TokenService,
     private cartService: CartService,
@@ -94,6 +94,7 @@ export class NavbarComponent implements OnInit {
 
 
      this.cartItems =  this.cartService.shopItems;
+    // this.timestamp = Date.now()
     console.log("iteeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeems",this.cartItems)
      this.cartItems = JSON.parse(localStorage.getItem('cart'));
     console.log("items", this.items);
@@ -112,13 +113,18 @@ export class NavbarComponent implements OnInit {
         console.log("data 2", data)
       }
     );
+    //location.reload();
 
     console.log("cart status -----", this.totalPrice);
   }
 
 
 
-
+  // getTs(){
+  //     return this.timestamp;
+  // }
+  
+ 
 
   logout() {
     this.tokenService.remove();

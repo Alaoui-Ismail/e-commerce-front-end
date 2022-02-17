@@ -86,7 +86,7 @@ export class DetailProductComponent implements OnInit {
     localStorage.setItem('qte', JSON.stringify(this.cartItems.length));
     localStorage.setItem('shopping', JSON.stringify(this.totalPrice));
 
-
+      location.reload();
    console.log("length",JSON.parse(localStorage.getItem('qte'))) 
     
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/models/user.model';
 import { RegisterService } from 'src/app/services/register.service';
@@ -20,7 +21,7 @@ export class RegisterComponent implements OnInit {
   };
   message: string = "";
 
-  constructor(private registerService: RegisterService,private _toastr:ToastrService) {
+  constructor(private registerService: RegisterService,private _toastr:ToastrService,private router:Router) {
 
   }
 
@@ -50,6 +51,7 @@ export class RegisterComponent implements OnInit {
       .subscribe((data) => {
         console.log(data);
         this.showToastr();
+        this.router.navigateByUrl("/login")
    
         
       },

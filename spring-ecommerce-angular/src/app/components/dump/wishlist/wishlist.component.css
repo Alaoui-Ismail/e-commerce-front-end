@@ -23,7 +23,9 @@
     font-weight: 400;
 }
 
-.row {
+.item {
+    height: 130px;
+    display: flex;
     border-top: 1px solid #E1E8EE;
     border-bottom: 1px solid #E1E8EE;
 }
@@ -116,7 +118,7 @@
         height: auto;
         overflow: hidden;
     }
-    .row {
+    .item {
         height: auto;
         flex-wrap: wrap;
         justify-content: center;

@@ -19,6 +19,7 @@ import { SaveCommandComponent } from './components/smart/save-command/save-comma
 import { InterceptorService } from './services/interceptor.service';
 import { WishlistComponent } from './components/dump/wishlist/wishlist.component';
 import { ToastrModule } from 'ngx-toastr';
+import { AuthInterceptorService } from './services/auth-interceptor.service';
 
 
 
@@ -60,6 +61,9 @@ import { ToastrModule } from 'ngx-toastr';
     {
       provide:HTTP_INTERCEPTORS, useClass:InterceptorService, multi: true
     },
+    {
+       provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true 
+    }
     
   ],
   bootstrap: [AppComponent]
