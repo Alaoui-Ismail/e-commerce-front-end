@@ -8,4 +8,6 @@ through the application.
 * Spring Boot
 * Spring Data
 * Spring MVC
+* Rest-Api
+* Angular
 
